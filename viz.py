@@ -3,7 +3,6 @@ import pygame
 class Viz:
     imageDictionary =  {}
     boardTextures = []
-    done = False
     def __init__(self, size, width, height):
         pygame.init()
         self.screen = pygame.display.set_mode((width, height))
@@ -17,6 +16,8 @@ class Viz:
         self.imageDictionary.update( { 'Right' : pygame.image.load('images/Right.png')  } )
         self.imageDictionary.update( { 'Center' : pygame.image.load('images/Center.png')  } )
         self.imageDictionary.update( { 'bg' : pygame.image.load('images/woodBG.jpg')  } )
+        self.imageDictionary.update( { True : pygame.image.load('images/p1.png')  } )
+        self.imageDictionary.update( { False : pygame.image.load('images/p2.png')  } )
 
     def drawBackground(self):
         self.screen.blit(self.imageDictionary['bg'], (0, 0))
@@ -29,6 +30,7 @@ class Viz:
                 self.screen.blit(self.boardTextures[j][i], (i * 32, j * 32))
 
     def insertTexture(self, x, y, image):
+        self.boardTextures[x][y] = pygame.Surface((32, 32), pygame.SRCALPHA)
         self.boardTextures[x][y].blit(self.imageDictionary[image], (0, 0))
 
     def initializeTextureBoard(self, size):
